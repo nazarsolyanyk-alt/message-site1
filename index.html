@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Важливе повідомлення</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      max-width: 600px;
+      position: relative;
+      z-index: 2;
+    }
+    h1 { margin-bottom: 16px; }
+    p { margin-bottom: 20px; }
+    #photo img {
+      max-width: 100%;
+      border-radius: 12px;
+    }
+    .caption {
+      margin-top: 12px;
+      font-size: 16px;
+      color: #fff;
+    }
+    /* Сніжинки */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: white;
+      font-size: 1em;
+      pointer-events: none;
+      z-index: 1;
+      animation-name: fall;
+      animation-timing-function: linear;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Повідомлення для тебе</h1>
+    <p>Ви отримали це повідомлення тому що були важливими для мене цього року.</p>
+    <div id="photo">
+      <img src="ПРИВ.png" alt="Фото для тебе">
+      <div class="caption">Дякую</div>
+    </div>
+  </div>
+
+  <audio id="audio" src="МУЗ.mp3" autoplay controls></audio>
+
+  <script>
+    // Автовідтворення музики
+    const audio = document.getElementById('audio');
+    audio.play().catch(() => {
+      console.log("Автовідтворення заблоковане браузером. Натисни Play.");
+    });
+
+    // Ефект снігу
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.textContent = '❄';
+      snowflake.style.left = Math.random() * window.innerWidth + 'px';
+      snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+      snowflake.style.opacity = Math.random();
+      snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      document.body.appendChild(snowflake);
+
+      setTimeout(() => {
+        snowflake.remove();
+      }, 10000);
+    }
+
+    setInterval(createSnowflake, 200);
+  </script>
+</body>
+</html>
